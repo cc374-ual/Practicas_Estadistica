@@ -1,5 +1,5 @@
 # Prácticas de Estadistica
 ## Autores: 
-1Ciprian Chira Simion 
-2Ioan Stefan Toderic  
-3Mayara Rosa Oliveira Barreto Mesquita*
+1 Ciprian Chira Simion 
+2 Ioan Stefan Toderic  
+3 Mayara Rosa Oliveira Barreto Mesquita
