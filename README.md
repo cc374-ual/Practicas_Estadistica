@@ -1,2 +1,2 @@
-# Practicas_Estadistica
-This is a line from RStudio
+# Prácticas de Estadistica
+## Autores: *Ciprian Chira Simion - Ioan Stefan Toderic - Mayara Rosa Oliveira Barreto Mesquita
