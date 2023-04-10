@@ -1,7 +1,7 @@
 # Carga un dataset por defecto en R
-datos <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3.csv", sep=",", dec=",", header=T);
+datos <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 1/notasA3.csv", sep=",", dec=",", header=T);
 
-datos
+
 #Instalar paquetes
 install.packages("e1071")    # DESCOMENTA ESTA LÍNEA
 
@@ -10,7 +10,7 @@ library(e1071)
 
 # Reemplaza los NA
 datos[datos == ""] <- '0';
-datos
+
 
 #Reemplazar aprobado suspenso (Transformación variables cuantitavias en cualitativas)  [Ejercicio 1]
 
@@ -27,19 +27,67 @@ datos$EXAMENJUNIO <- ifelse(datos$EXAMENJUNIO >= 5, "Aprobado", "Suspenso")
 datos$EXAMENSEPTIEMBRE <- ifelse(datos$EXAMENSEPTIEMBRE >= 5, "Aprobado", "Suspenso")
 datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", "Suspenso")
 
+
+#Dividimos los grupos en A y B
+grupoA <- subset(datos, Grupo == "A");
+grupoB <- subset(datos, Grupo == "B");
+
+
 #NaiveBayes [Ejercicio 2]
-m<-naiveBayes(datos$NOTAFINALJUNIO~.,data=datos)
-#Ver el resultado de NBayes
-m
+
+#Se aplica el clasificador naiveBayes para cada grupo por separado
+
+mA<-naiveBayes(grupoA$NOTAFINALJUNIO~.,data=grupoA)
+mB<-naiveBayes(grupoB$NOTAFINALJUNIO~.,data=grupoB)
+
+mA$apriori
+mB$apriori
 
 
-# Extrae predicciones para evaluar el clasificador
-# A= Predice que aprueba
-# B= Aprueba
-df = datos[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
-pred = predict(m, df)
+# 
+# Hay que sacar sólo las columnas que nos interesa de ambos grupos para la predicción
+# 
+dfA = grupoA[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
+dfB = grupoB[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
 
-table(pred,datos$NOTAFINALJUNIO)
+#Aplicamos la predicción para el grupo A y el grupo B
+
+predA = predict(mA, grupoA)
+predB = predict(mB, grupoB)
+
+
+#Predición para el grupo A
+
+#Prob. acertar en la predicción aprobado dado que ha aprobado
+#
+#A=Prob. acierto en la predicción aprobado
+#B=Prob. alumno ha aprobado
+#
+
+tablaPredA = table(predA,grupoA$NOTAFINALJUNIO)
+notaFinA= table(grupoA$NOTAFINALJUNIO)
+
+
+A= tablaPredA["Aprobado","Aprobado"]
+B= notaFinA["Aprobado"]
+
+P_B_dado_A = A/B
+
+P_B_dado_A
+
+
+
+nS["Suspenso"]/nconj["Suspenso","Suspenso"]
+
+
+
+
+
+
+
+
+
+
 
 
 
