@@ -1,5 +1,5 @@
 # Carga un dataset por defecto en R
-datos <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 1/notasA3.csv", sep=",", dec=",", header=T);
+datos <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3.csv", sep=",", dec=",", header=T);
 
 
 #Instalar paquetes
@@ -67,22 +67,31 @@ predB = predict(mB, grupoB)
 tablaPredA = table(predA,grupoA$NOTAFINALJUNIO)
 notaFinA= table(grupoA$NOTAFINALJUNIO)
 
+tablaPredA
+
 
 A= tablaPredA["Aprobado","Aprobado"]
 B= notaFinA["Aprobado"]
-
+A
+B
 P_B_dado_A = A/B
 
 P_B_dado_A
 
+#Prueba
+# Calcular la probabilidad de que el clasificador prediga "Aprobado" dado que el alumno ha aprobado
+prob_clasif_aprobado_dado_aprobado <- tablaPredA["Aprobado", "Aprobado"] / sum(tablaPredA[, "Aprobado"])
 
+# Calcular la probabilidad de que un alumno apruebe en general
+prob_aprobado <- sum(grupoA$NOTAFINALJUNIO== "Aprobado") / nrow(test)
 
-nS["Suspenso"]/nconj["Suspenso","Suspenso"]
+# Calcular la probabilidad de que el clasificador prediga "Aprobado" independientemente de si el alumno ha aprobado o no
+prob_clasif_aprobado <- sum(tablaPredA["Aprobado", ]) / sum(tablaPredA)
 
+# Calcular la probabilidad de que un alumno apruebe dado que el clasificador predice que va a aprobar
+prob_aprobado_dado_clasif_aprobado <- prob_clasif_aprobado_dado_aprobado * prob_aprobado / prob_clasif_aprobado
 
-
-
-
+prob_aprobado_dado_clasif_aprobado
 
 
 
