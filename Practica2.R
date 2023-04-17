@@ -57,48 +57,30 @@ predB = predict(mB, grupoB)
 
 
 #Predición para el grupo A
-
-#Prob. acertar en la predicción aprobado dado que ha aprobado
-#
-#A=Prob. acierto en la predicción aprobado
-#B=Prob. alumno ha aprobado
-#
-
 tablaPredA = table(predA,grupoA$NOTAFINALJUNIO)
 notaFinA= table(grupoA$NOTAFINALJUNIO)
 
 tablaPredA
+#Prob. acertar en la predicción aprobado dado que ha aprobado (A)
 
-
-A= tablaPredA["Aprobado","Aprobado"]
-B= notaFinA["Aprobado"]
+A=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[2,1])
 A
+#Prob de que acierte en la prd de suspenso dado que ha suspendido (B)
+
+B=tablaPredA[2,2] / (tablaPredA[1,2] + tablaPredA[2,2])
 B
-P_B_dado_A = A/B
+#Prob de que el alumno aprueba dado que predice aprobar (C)
 
-P_B_dado_A
+C=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[1,2])
+C
+#Probabilidad de que suspenda dado que predice suspender (D)
 
-#Prueba
-# Calcular la probabilidad de que el clasificador prediga "Aprobado" dado que el alumno ha aprobado
-prob_clasif_aprobado_dado_aprobado <- tablaPredA["Aprobado", "Aprobado"] / sum(tablaPredA[, "Aprobado"])
+D=tablaPredA[2,2]/ (tablaPredA[2,1] + tablaPredA[2,2])
+D
+#Probablidad de que el claisicador acierte en su prediccion (E)
 
-# Calcular la probabilidad de que un alumno apruebe en general
-prob_aprobado <- sum(grupoA$NOTAFINALJUNIO== "Aprobado") / nrow(test)
-
-# Calcular la probabilidad de que el clasificador prediga "Aprobado" independientemente de si el alumno ha aprobado o no
-prob_clasif_aprobado <- sum(tablaPredA["Aprobado", ]) / sum(tablaPredA)
-
-# Calcular la probabilidad de que un alumno apruebe dado que el clasificador predice que va a aprobar
-prob_aprobado_dado_clasif_aprobado <- prob_clasif_aprobado_dado_aprobado * prob_aprobado / prob_clasif_aprobado
-
-prob_aprobado_dado_clasif_aprobado
-
-
-
-
-
-
-
+E=(tablaPredA[1,1]/46 *A) + (tablaPredA[2,2]/ 46 *B)
+E
 
 # Seleciona las variabels categóricas para el modelo
 df = datos[,c("V1","V2","S")]
