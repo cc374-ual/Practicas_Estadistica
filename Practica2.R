@@ -102,46 +102,49 @@ E=(tablaPredA[1,1]/46 *A) + (tablaPredA[2,2]/ 46 *B)
 E
 
 
+#3 Ejericicio
+
+#A --> Como conslusión podemos decir que los datos son insucientes para poder predecir un resultado
+  mA3 <- naiveBayes(datos[,c("Grupo")], datos$NOTAFINALJUNIO)
+  mA3$apriori
+  
+  dfA3 = datos[,c("Grupo")]
+  predA3 = predict(mA3, dfA3)
+  predA3
+  tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+  tablaPredA3
+#B --> Con el grupo, y las practicas 1 y 2 si podemos obtener resultados
+  mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2")], datos$NOTAFINALJUNIO)
+  mA3$apriori
+  
+  dfA3 = datos[,c("Grupo","Practica1","Practica2")]
+  predA3 = predict(mA3, dfA3)
+  predA3
+  tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+  tablaPredA3
+#C --> Al añadir una nueva variable el resultado es algo mas preciso
+  mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")], datos$NOTAFINALJUNIO)
+  mA3$apriori
+  
+  dfA3 = datos[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")]
+  predA3 = predict(mA3, dfA3)
+  predA3
+  tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+  tablaPredA3
+#D --> Al usar todos los datos el resultado obviamente es más preciso
+  mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")], datos$NOTAFINALJUNIO)
+  mA3$apriori
+  
+  dfA3 = datos[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
+  predA3 = predict(mA3, dfA3)
+  predA3
+  tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+  tablaPredA3
+#Ejercicio 4
+  
+  
 
 
-
-# Seleciona las variabels categóricas para el modelo
-df = datos[,c("V1","V2","S")]
-
-# Selecciona los datos de la variable a predecir Y (variable clase)
-Y = df[,"S"]
-X = df[,c("V1","V2")]
-
-
-m = naiveBayes(X,Y) #m <-naiveBayes(NF~.,data,)
-
-# Calcula las probabilidades "a mano" y comprara
-m$apriori
-
-# Distribución de la clase P(S)
-m$apriori
-nclase = table(Y)
-
-# P(V1|Species)
-m$tables$V1
-
-nconjunta = table(df$S, df$V1)
-prop.table(table(df$S, df$V1), margin=1)
-nconjunta["setosa","FALSE"]/nclase["setosa"]
-
-
-
-# Extrae predicciones para evaluar el clasificador
-pred = predict(m, df[,c("V1","V2")])
-
-# Evaluar capacidad de prediccion del modelo ---------
-# Probabilidad de que acierte en la predicción dado que el tipo es setosa. 
-# Si T = 'El clasificador predice setosa' y S = 'setosa'
-# P(T|S) = P(T y S)/P(S)
-
-nconjunta = table(pred, df$S)  #los valores de la izq son los de la primera variable
-nS = table(df$S)
-nconjunta["setosa","setosa"]/nS["setosa"]
 
 
 
