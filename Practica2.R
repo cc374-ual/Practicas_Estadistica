@@ -1,5 +1,5 @@
 # Carga un dataset por defecto en R
-datos <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 1/notasA3.csv", sep=",", dec=",", header=T);
+datos <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3.csv", sep=",", dec=",", header=T);
 
 
 #Instalar paquetes
@@ -57,39 +57,30 @@ predB = predict(mB, grupoB)
 
 
 #Predición para el grupo A
-
-#Prob. acertar en la predicción aprobado dado que ha aprobado
-#
-#A=Prob. acierto en la predicción aprobado
-#B=Prob. alumno ha aprobado
-#
-
 tablaPredA = table(predA,grupoA$NOTAFINALJUNIO)
 notaFinA= table(grupoA$NOTAFINALJUNIO)
 
+tablaPredA
+#Prob. acertar en la predicción aprobado dado que ha aprobado (A)
 
-A= tablaPredA["Aprobado","Aprobado"]
-B= notaFinA["Aprobado"]
+A=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[2,1])
+A
+#Prob de que acierte en la prd de suspenso dado que ha suspendido (B)
 
-P_B_dado_A = A/B
+B=tablaPredA[2,2] / (tablaPredA[1,2] + tablaPredA[2,2])
+B
+#Prob de que el alumno aprueba dado que predice aprobar (C)
 
-P_B_dado_A
+C=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[1,2])
+C
+#Probabilidad de que suspenda dado que predice suspender (D)
 
+D=tablaPredA[2,2]/ (tablaPredA[2,1] + tablaPredA[2,2])
+D
+#Probablidad de que el claisicador acierte en su prediccion (E)
 
-
-nS["Suspenso"]/nconj["Suspenso","Suspenso"]
-
-
-
-
-
-
-
-
-
-
-
-
+E=(tablaPredA[1,1]/46 *A) + (tablaPredA[2,2]/ 46 *B)
+E
 
 # Seleciona las variabels categóricas para el modelo
 df = datos[,c("V1","V2","S")]
