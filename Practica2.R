@@ -52,35 +52,58 @@ dfB = grupoB[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EX
 
 #Aplicamos la predicción para el grupo A y el grupo B
 
-predA = predict(mA, grupoA)
-predB = predict(mB, grupoB)
+predA = predict(mA, dfA)
+predB = predict(mB, dfB)
 
 
 #Predición para el grupo A
 tablaPredA = table(predA,grupoA$NOTAFINALJUNIO)
-notaFinA= table(grupoA$NOTAFINALJUNIO)
-
 tablaPredA
+
+#Prediccion para el grupo B
+tablaPredB = table(predB,grupoB$NOTAFINALJUNIO)
+tablaPredB
 #Prob. acertar en la predicción aprobado dado que ha aprobado (A)
 
-A=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[2,1])
-A
+#Grupo A
+  A=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[2,1])
+  A
+#GRUPO B
+  A1=tablaPredB[1,1] / (tablaPredB[1,1] + tablaPredB[2,1])
+  A1
+  
 #Prob de que acierte en la prd de suspenso dado que ha suspendido (B)
 
-B=tablaPredA[2,2] / (tablaPredA[1,2] + tablaPredA[2,2])
-B
+#Grupo A
+  B=tablaPredA[2,2] / (tablaPredA[1,2] + tablaPredA[2,2])
+  B
+#Grupo B
+  B1=tablaPredB[2,2] / (tablaPredB[1,2] + tablaPredB[2,2])
+  B1
 #Prob de que el alumno aprueba dado que predice aprobar (C)
 
-C=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[1,2])
-C
+#Grupo A
+  C=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[1,2])
+  C
+#Grupo B
+  C1=tablaPredB[1,1] / (tablaPredB[1,1] + tablaPredB[1,2])
+  C1
 #Probabilidad de que suspenda dado que predice suspender (D)
 
-D=tablaPredA[2,2]/ (tablaPredA[2,1] + tablaPredA[2,2])
-D
+#Grupo A
+  D=tablaPredA[2,2]/ (tablaPredA[2,1] + tablaPredA[2,2])
+  D
+#Grupo B
+  D1=tablaPredB[2,2]/ (tablaPredB[2,1] + tablaPredB[2,2])
+  D1
 #Probablidad de que el claisicador acierte en su prediccion (E)
 
 E=(tablaPredA[1,1]/46 *A) + (tablaPredA[2,2]/ 46 *B)
 E
+
+
+
+
 
 # Seleciona las variabels categóricas para el modelo
 df = datos[,c("V1","V2","S")]
