@@ -100,7 +100,8 @@ tablaPredB
 
 E=(tablaPredA[1,1]/46 *A) + (tablaPredA[2,2]/ 46 *B)
 E
-
+E1=(tablaPredB[1,1]/54 *A) + (tablaPredB[2,2]/ 54 *B)
+E1
 
 #3 Ejericicio
 
@@ -140,17 +141,18 @@ E
   predA3
   tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
   tablaPredA3
-#Ejercicio 4
+
+  #Ejercicio 4
 datos <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3P.csv", sep=",", dec=",", header=T); 
+# Ajustar el modelo
+modelo <- naiveBayes(datos[,c("Grupo","Practica1")], datos$Notajunio)
 
-  mAGrupo <- naiveBayes(datos[,c("Grupo","Practica1")], datos$NOTAFINALJUNIO)
-  mAGrupo$apriori
-  
-  dfAGrupo = datos[,c("Grupo","Practica1")]
-  predAGrupo= predict(mAGrupo, dfAGrupo)
-  predAGrupo
-  tablaPredAGrupo = table(predAGrupo,datos$NOTAFINALJUNIO)
-  tablaPredAGrupo
-
+# Hacer predicciones para los datos
+df <- datos[,c("Grupo","Practica1")]
+predicciones <- predict(modelo, df)
+predicciones
+# Comparar las predicciones con los valores reales
+tablaPred <- table(predicciones, datos$Notajunio)
+tablaPred
 
 
