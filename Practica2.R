@@ -141,11 +141,16 @@ E
   tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
   tablaPredA3
 #Ejercicio 4
+datos <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3P.csv", sep=",", dec=",", header=T); 
+
+  mAGrupo <- naiveBayes(datos[,c("Grupo","Practica1")], datos$NOTAFINALJUNIO)
+  mAGrupo$apriori
   
-  
-
-
-
+  dfAGrupo = datos[,c("Grupo","Practica1")]
+  predAGrupo= predict(mAGrupo, dfAGrupo)
+  predAGrupo
+  tablaPredAGrupo = table(predAGrupo,datos$NOTAFINALJUNIO)
+  tablaPredAGrupo
 
 
 
