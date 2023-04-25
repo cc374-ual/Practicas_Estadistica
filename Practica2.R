@@ -32,6 +32,26 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
 grupoA <- subset(datos, Grupo == "A");
 grupoB <- subset(datos, Grupo == "B");
 
+# Seleciona las variabels categóricas para el modelo
+#df = datos[,c("V1","V2","S")]
+
+# Selecciona los datos de la variable a predecir Y (variable clase)
+#Y = df[,"S"]
+#X = df[,c("V1","V2")]
+#X
+
+#m = naiveBayes(X,Y)
+
+m= naiveBayes(datos[,c("Grupo","Practica1","Practica2","Practica3","EXAMENJUNIO")],datos$NOTAFINALJUNIO)
+
+df=datos[,c("Grupo","Practica1","Practica2","Practica3")]
+m
+
+pred= predict(m, df[,c("Grupo")])
+
+pred
+
+table(pred,datos$NOTAFINALJUNIO)
 
 #NaiveBayes [Ejercicio 2]
 
@@ -52,38 +72,53 @@ dfB = grupoB[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EX
 
 #Aplicamos la predicción para el grupo A y el grupo B
 
-predA = predict(mA, grupoA)
-predB = predict(mB, grupoB)
+predA = predict(mA, dfA)
+predB = predict(mB, dfB)
 
 
 #Predición para el grupo A
-
-#Prob. acertar en la predicción aprobado dado que ha aprobado
-#
-#A=Prob. acierto en la predicción aprobado
-#B=Prob. alumno ha aprobado
-#
-
 tablaPredA = table(predA,grupoA$NOTAFINALJUNIO)
-notaFinA= table(grupoA$NOTAFINALJUNIO)
+tablaPredA
 
+#Prediccion para el grupo B
+tablaPredB = table(predB,grupoB$NOTAFINALJUNIO)
+tablaPredB
+#Prob. acertar en la predicción aprobado dado que ha aprobado (A)
 
-A= tablaPredA["Aprobado","Aprobado"]
-B= notaFinA["Aprobado"]
+#Grupo A
+A=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[2,1])
+A
+#GRUPO B
+A1=tablaPredB[1,1] / (tablaPredB[1,1] + tablaPredB[2,1])
+A1
 
-P_B_dado_A = A/B
+#Prob de que acierte en la prd de suspenso dado que ha suspendido (B)
 
-P_B_dado_A
+#Grupo A
+B=tablaPredA[2,2] / (tablaPredA[1,2] + tablaPredA[2,2])
+B
+#Grupo B
+B1=tablaPredB[2,2] / (tablaPredB[1,2] + tablaPredB[2,2])
+B1
+#Prob de que el alumno aprueba dado que predice aprobar (C)
 
+#Grupo A
+C=tablaPredA[1,1] / (tablaPredA[1,1] + tablaPredA[1,2])
+C
+#Grupo B
+C1=tablaPredB[1,1] / (tablaPredB[1,1] + tablaPredB[1,2])
+C1
+#Probabilidad de que suspenda dado que predice suspender (D)
 
+#Grupo A
+D=tablaPredA[2,2]/ (tablaPredA[2,1] + tablaPredA[2,2])
+D
+#Grupo B
+D1=tablaPredB[2,2]/ (tablaPredB[2,1] + tablaPredB[2,2])
+D1
+#Probablidad de que el claisicador acierte en su prediccion (E)
 
-nS["Suspenso"]/nconj["Suspenso","Suspenso"]
-
-
-
-
-
-
+E=(tablaPredA[1,1]/
 
 
 
