@@ -97,60 +97,199 @@ D
 D1=tablaPredB[2,2]/ (tablaPredB[2,1] + tablaPredB[2,2])
 D1
 #Probablidad de que el claisicador acierte en su prediccion (E)
-
+#Grupo A
 E=(tablaPredA[1,1]/46 *A) + (tablaPredA[2,2]/ 46 *B)
 E
+#Grupo B
+E1=(tablaPredB[1,1]/54 *A) + (tablaPredB[2,2]/54 *B)
+E1
 
 
-#3 Ejericicio
+tablaPredB
+
+
+##
+##
+##
+#3 Ejercicio 3
+##
+##
+##
+
 
 #A --> Como conslusión podemos decir que los datos son insucientes para poder predecir un resultado
-mA3 <- naiveBayes(datos[,c("Grupo")], datos$NOTAFINALJUNIO)
+#mA3 <- naiveBayes(datos[,c("Grupo")], datos$NOTAFINALJUNIO)
+mA3 <- naiveBayes(grupoA[,c("Grupo")], grupoA$NOTAFINALJUNIO)
+mB3 <- naiveBayes(grupoB[,c("Grupo")], grupoB$NOTAFINALJUNIO)
 mA3$apriori
 
-dfA3 = datos[,c("Grupo")]
-predA3 = predict(mA3, dfA3)
-predA3
-tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+#dfA3 = datos[,c("Grupo")]
+dfA3 = grupoA[,c("Grupo")]
+dfB3 = grupoB[,c("Grupo")]
+
+
+#predA3 = predict(mA3, dfA3)
+predA3 = predict(mA3,dfA3)
+predB3 = predict(mB3,dfB3)
+
+
+#tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+tablaPredA3 = table(predA3,grupoA$NOTAFINALJUNIO)
+tablaPredB3 = table(predB3,grupoB$NOTAFINALJUNIO)
+
+#tablaPredA3
+
 tablaPredA3
+tablaPredB3
+
+#
+#
 #B --> Con el grupo, y las practicas 1 y 2 si podemos obtener resultados
-mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2")], datos$NOTAFINALJUNIO)
-mA3$apriori
+#
+#
+#mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2")], datos$NOTAFINALJUNIO)
+mA3 <- naiveBayes(grupoA[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")], grupoA$NOTAFINALJUNIO)
+mB3 <- naiveBayes(grupoB[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")], grupoB$NOTAFINALJUNIO)
 
-dfA3 = datos[,c("Grupo","Practica1","Practica2")]
+
+#mA3$apriori
+
+#dfA3 = datos[,c("Grupo","Practica1","Practica2")]
+dfA3 = grupoA[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")]
+dfB3 = grupoB[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")]
+
+#predA3 = predict(mA3, dfA3)
+
 predA3 = predict(mA3, dfA3)
-predA3
-tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+predB3 = predict(mB3, dfB3)
+
+
+#tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+#tablaPredA3
+tablaPredA3 = table(predA3,grupoA$NOTAFINALJUNIO)
+tablaPredB3 = table(predB3,grupoB$NOTAFINALJUNIO)
+
 tablaPredA3
+tablaPredB3
+
+            #Apartado a 
+
+#Grupo A
+A=tablaPredA3[1,1] / (tablaPredA3[1,1] + tablaPredA3[2,1])
+A
+#GRUPO B
+A1=tablaPredB3[1,1] / (tablaPredB3[1,1] + tablaPredB3[2,1])
+A1
+
+            #Apartado b 
+#Grupo A
+B=tablaPredA3[2,2] / (tablaPredA3[1,2] + tablaPredA3[2,2])
+B
+#Grupo B
+B1=tablaPredB3[2,2] / (tablaPredB3[1,2] + tablaPredB3[2,2])
+B1
+
+            #Apartado c 
+#Grupo A
+C=tablaPredA3[1,1] / (tablaPredA3[1,1] + tablaPredA3[1,2])
+C
+#Grupo B
+C1=tablaPredB3[1,1] / (tablaPredB3[1,1] + tablaPredB3[1,2])
+C1
+#Probabilidad de que suspenda dado que predice suspender (D)
+
+            #Apartado d 
+#Grupo A
+D=tablaPredA3[2,2]/ (tablaPredA3[2,1] + tablaPredA3[2,2])
+D
+#Grupo B
+D1=tablaPredB3[2,2]/ (tablaPredB3[2,1] + tablaPredB3[2,2])
+D1
+
+            #Apartado e
+#Probablidad de que el clasificador acierte en su prediccion (E)
+#Grupo A
+E=(tablaPredA3[1,1]/46 *A) + (tablaPredA3[2,2]/ 46 *B)
+E
+#Grupo B
+E1=(tablaPredB3[1,1]/54 *A) + (tablaPredB3[2,2]/54 *B)
+E1
+
+
+#El problema que tenemos en este apartado es que no sabemos exáctamente qué comparar
+#Lo teníamos hecho comparando todos los datos, sin dividir en datos del grupo A y datos del grupo B.
+#Al no dividir los datos entre el grupo A y el grupo B, no podemos sacar conclusiones para el
+#ejercicio 3. Debido a esto, hay que modificar todo el ejercicio 3 para que se 
+#usen datos de grupos A y B en vez de datos generales.
+
+
+
+
+
+
+#
+#
 #C --> Al añadir una nueva variable el resultado es algo mas preciso
-mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")], datos$NOTAFINALJUNIO)
+#
+#
+#mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")], datos$NOTAFINALJUNIO)
+mA3 <- naiveBayes(grupoA[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")], grupoA$NOTAFINALJUNIO)
+mB3 <- naiveBayes(grupoB[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")], grupoB$NOTAFINALJUNIO)
 mA3$apriori
 
-dfA3 = datos[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")]
+#dfA3 = datos[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")]
+dfA3 = grupoA[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")]
+dfB3 = grupoB[,c("Grupo","Practica1","Practica2","EXAMENJUNIO")]
+
+#predA3 = predict(mA3, dfA3)
+
 predA3 = predict(mA3, dfA3)
+predB3 = predict(mB3, dfB3)
 predA3
-tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+
+#tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+tablaPredA3 = table(predA3,grupoA$NOTAFINALJUNIO)
+tablaPredA3 = table(predB3,grupoB$NOTAFINALJUNIO)
 tablaPredA3
+tablaPredB3
+
+
+
+
+#
+#
 #D --> Al usar todos los datos el resultado obviamente es más preciso
-mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")], datos$NOTAFINALJUNIO)
+#
+#
+#mA3 <- naiveBayes(datos[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")], datos$NOTAFINALJUNIO)
+mA3 <- naiveBayes(grupoA[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")], grupoA$NOTAFINALJUNIO)
+mB3 <- naiveBayes(grupoB[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")], grupoB$NOTAFINALJUNIO)
 mA3$apriori
 
-dfA3 = datos[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
-predA3 = predict(mA3, dfA3)
-predA3
-tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
-tablaPredA3
-#Ejercicio 4
-datos <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3P.csv", sep=",", dec=",", header=T); 
+#dfA3 = datos[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
+dfA3 = grupoA[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
+dfB3 = grupoB[,c("Grupo","Practica1","Practica2","Practica3","TOTALpracticas","EXAMENJUNIO")]
 
+#predA3 = predict(mA3, dfA3)
+predA3 = predict(mA3, dfA3)
+predB3 = predict(mB3, dfB3)
+predA3
+
+#tablaPredA3 = table(predA3,datos$NOTAFINALJUNIO)
+tablaPredA3 = table(predA3,grupoA$NOTAFINALJUNIO)
+tablaPredB3 = table(predB3,grupoB$NOTAFINALJUNIO)
+
+
+#Ejercicio 4
+datos2 <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 2/notasA3.csv", sep=",", dec=",", header=T); 
 mAGrupo <- naiveBayes(datos[,c("Grupo","Practica1")], datos$NOTAFINALJUNIO)
 mAGrupo$apriori
 
-dfAGrupo = datos[,c("Grupo","Practica1")]
+dfAGrupo = datos2[,c("Grupo","Practica1")]
 predAGrupo= predict(mAGrupo, dfAGrupo)
-predAGrupo
-tablaPredAGrupo = table(predAGrupo,datos$NOTAFINALJUNIO)
-tablaPredAGrupo
+table(predAGrupo)
+
+
 
 
 
