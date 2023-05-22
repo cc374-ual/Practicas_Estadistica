@@ -20,3 +20,26 @@ datos$Totalcuestionarios <- ifelse(datos$Totalcuestionarios >= 0.5, "Aprobado", 
 datos$EXAMENJUNIO <- ifelse(datos$EXAMENJUNIO >= 5, "Aprobado", "Suspenso")
 datos$EXAMENSEPTIEMBRE <- ifelse(datos$EXAMENSEPTIEMBRE >= 5, "Aprobado", "Suspenso")
 datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", "Suspenso")
+
+
+#Ejercicio 1
+
+x=datos[,c("Grupo","Practica1")]
+y=datos[,c("NOTAFINALJUNIO")]
+
+table(x,y)
+
+group_by(Grupo)
+#U1 = Nota Junio
+#U2 = Nota del resto de variables
+#
+#H0: La variable U1 es independiente de U2.
+#H1: La variable U1 es dependiente de U2.
+#
+#nivel de significancia alpha=0.5
+
+
+tabla = table(datos$Practica1,datos$NOTAFINALJUNIO)
+tabla
+
+
