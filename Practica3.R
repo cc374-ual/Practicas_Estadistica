@@ -351,11 +351,11 @@ grupoB <- subset(datosNum, Grupo == "B");
   notaFinalJunioB <- as.numeric(grupoB[, "NOTAFINALJUNIO"])
   notaFinalSeptiembreB  <- as.numeric(grupoB[, "NOTAFINALSEPTIEMBRE"])
   
-  res1 <- var.test(notaExamenA, notaExamenB)
-  res2 <- var.test(notaFinalJunioA, notaFinalJunioB)
-  res3 <- var.test(notaFinalSeptiembreA, notaFinalSeptiembreB)
+  NotaExamen <- t.test(notaExamenA, notaExamenB)
+  NotaFinalJunio <- t.test(notaFinalJunioA, notaFinalJunioB)
+  NotaFinalSeptiembre <- t.test(notaFinalSeptiembreA, notaFinalSeptiembreB)
 
-  res1
-  res2
-  res3
+  NotaExamen
+  NotaFinalJunio 
+  NotaFinalSeptiembre 
   
