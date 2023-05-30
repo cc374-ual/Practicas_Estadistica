@@ -100,6 +100,7 @@ D1
 #Grupo A
 E=(tablaPredA[1,1]/46 *A) + (tablaPredA[2,2]/ 46 *B)
 E
+=======
 #Grupo B
 E1=(tablaPredB[1,1]/54 *A) + (tablaPredB[2,2]/54 *B)
 E1
@@ -260,7 +261,16 @@ dfAGrupo = datos2[,c("Grupo","Practica1")]
 predAGrupo= predict(mAGrupo, dfAGrupo)
 table(predAGrupo)
 
+  # Carga de datos
+  datos2 <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3P.csv", sep=",", dec=",", header=T)
 
 
+  mAGrupo <- naiveBayes(datos[,c("Grupo","Practica1")], datos$NOTAFINALJUNIO)
+  mAGrupo$apriori
+  
+  dfAGrupo = datos2[,c("Grupo","Practica1")]
+  predAGrupo= predict(mAGrupo, dfAGrupo)
+  table(predAGrupo)
+predAGrupo
 
-
+  
