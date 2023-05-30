@@ -143,16 +143,18 @@ E1
   tablaPredA3
 
   #Ejercicio 4
-datos <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3P.csv", sep=",", dec=",", header=T); 
-# Ajustar el modelo
-modelo <- naiveBayes(datos[,c("Grupo","Practica1")], datos$Notajunio)
-
-# Hacer predicciones para los datos
-df <- datos[,c("Grupo","Practica1")]
-predicciones <- predict(modelo, df)
-predicciones
-# Comparar las predicciones con los valores reales
-tablaPred <- table(predicciones, datos$Notajunio)
-tablaPred
 
 
+  # Carga de datos
+  datos2 <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3P.csv", sep=",", dec=",", header=T)
+
+
+  mAGrupo <- naiveBayes(datos[,c("Grupo","Practica1")], datos$NOTAFINALJUNIO)
+  mAGrupo$apriori
+  
+  dfAGrupo = datos2[,c("Grupo","Practica1")]
+  predAGrupo= predict(mAGrupo, dfAGrupo)
+  table(predAGrupo)
+predAGrupo
+
+  
