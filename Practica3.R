@@ -21,7 +21,7 @@ datos$EXAMENSEPTIEMBRE <- ifelse(datos$EXAMENSEPTIEMBRE >= 5, "Aprobado", "Suspe
 datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", "Suspenso")
 
 
-#Ejercicio 1
+#---------------------------------------------Ejercicio 1---------------------------------------------
 
 #
 #
@@ -312,8 +312,7 @@ t1$p.value
 # Como el p-valor = 0.5987006 > 0.05 = alpha, con los datos disponibles
 # no podemos rechazar la hipótesis nula por lo que concluimos que son independientes
 
-
-#Ejercicio 2
+#---------------------------------------------Ejercicio 2---------------------------------------------
 datosNum <- read.csv("D:/Año2023/2Cuatrimestre/Estadistica/notasA3.csv", sep=",", dec=",", header=T)
 
 # Reemplaza los NA
@@ -323,8 +322,40 @@ exjunio <- as.numeric(datosNum[, "EXAMENJUNIO"])
 notafinjunio <- as.numeric(datosNum[, "NOTAFINALJUNIO"])
 
 # Realizar prueba t de muestras pareadas
-result <- t.test(exjunio, notafinjunio, paired = TRUE)
+prop.test(exjunio, notafinjunio)
+#resultado <- t.test(exjunio, notafinjunio, paired = TRUE)
+#resultado <- prop.test(sum(exjunio), sum(notafinjunio))
 
-# Imprimir los resultados
-print(result)
 
+#---------------------------------------------Ejercicio 3---------------------------------------------
+exseptiembre <- as.numeric(datosNum[, "EXAMENSEPTIEMBRE"])
+notafinseptiembre <- as.numeric(datosNum[, "NOTAFINALSEPTIEMBRE"])
+
+# Realizar prueba t de muestras pareadas
+t.test(exseptiembre, notafinseptiembre)
+
+
+# Realizar prueba t de muestras pareadas
+resultado <- t.test(exseptiembre, notafinseptiembre, paired = TRUE)
+
+# Mostrar los resultados
+resultado
+
+#---------------------------------------------Ejercicio 4---------------------------------------------
+grupoA <- subset(datosNum, Grupo == "A");
+  notaExamenA <- as.numeric(grupoA[, "EXAMENJUNIO"])
+  notaFinalJunioA  <- as.numeric(grupoA[, "NOTAFINALJUNIO"])
+  notaFinalSeptiembreA  <- as.numeric(grupoA[, "NOTAFINALSEPTIEMBRE"])
+grupoB <- subset(datosNum, Grupo == "B");
+  notaExamenB<- as.numeric(grupoB[, "EXAMENJUNIO"])
+  notaFinalJunioB <- as.numeric(grupoB[, "NOTAFINALJUNIO"])
+  notaFinalSeptiembreB  <- as.numeric(grupoB[, "NOTAFINALSEPTIEMBRE"])
+  
+  NotaExamen <- t.test(notaExamenA, notaExamenB)
+  NotaFinalJunio <- t.test(notaFinalJunioA, notaFinalJunioB)
+  NotaFinalSeptiembre <- t.test(notaFinalSeptiembreA, notaFinalSeptiembreB)
+
+  NotaExamen
+  NotaFinalJunio 
+  NotaFinalSeptiembre 
+  
