@@ -95,11 +95,7 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     U2=datos[,c("Practica3")]
     
     x=table(datos$NOTAFINALJUNIO,datos$EXAMENJUNIO)
-    y=as.numeric(x)
-    
-    y
-    
-    
+  
     tabla = table(U1,U2)
     tabla
     t1=chisq.test(tabla,simulate.p.value=TRUE)
@@ -340,10 +336,8 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     #nivel de significancia alpha=0.5
     
     U1= as.numeric(datos[, "EXAMENJUNIO"])
-    U1
-    
     U2= as.numeric(datos[,"NOTAFINALJUNIO"])
-    U2    
+    
     testProp = t.test(U1,U2,paired=TRUE)
     testProp$p.value    
     
@@ -352,7 +346,6 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
 
 
 #Ejercicio 3
-
     
     datos <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 1/notasA3.csv", sep=",", dec=",", header=T);
     
