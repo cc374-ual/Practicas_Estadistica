@@ -347,9 +347,8 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     testProp = t.test(U1,U2,paired=TRUE)
     testProp$p.value    
     
-    #Obtenemos un p-valor de 4.479137*10^-36, que, al ser > 0.05, no podemos rechazar
-    #la hipótesis nula, con lo cual podemos decir no hay diferencias
-    #entre las dos variables
+    #Obtenemos un p-valor de 4.479137*10^-36, que, al ser < 0.05, podemos rechazar
+    #la hipótesis nula, con lo cual sí hay diferencias entre ambas variables
 
 
 #Ejercicio 3
@@ -377,7 +376,33 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     testprop2=t.test(U1,U2, paired=TRUE)    
     testprop2$p.value
     
+    #Obtenemos un p-valor de 5.576607*10^-09, que, al ser < 0.05,podemos rechazar
+    #la hipótesis nula, con lo cual podemos decir sí hay diferencias
+    #entre las dos variables
+    
 #---------------------------------------------Ejercicio 4---------------------------------------------
+  
+  #
+  #
+  #Usando la nota del examen de Junio
+  #
+  #
+  #U1 = notaExamenGrupoA
+  #U2 = notaExamenGrupoB
+  #
+  
+      
+  #  
+  #Primero tenemos que comprobar si la varianza es igual o es distinta 
+  #de ambas poblaciones.
+  #Para ello tenemos que hacer un var.test()
+  #
+  #
+  #
+  t1 = var.test(notaExamenA,notaExamenB, p.value=TRUE)
+  t1$p.value
+  
+  
   
   grupoA <- subset(datos, Grupo == "A");
   grupoB <- subset(datos, Grupo == "B");
@@ -393,9 +418,9 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
   notaExamenA <- as.numeric(grupoA[, "EXAMENJUNIO"])
   notaExamenB <- as.numeric(grupoB[, "EXAMENJUNIO"])
   
+  t1 = var.test(notaExamenA,notaExamenB, p.value=TRUE)
   
-  t1
-  
+  t1$p.value
   
   notaFinalJunioA  <- as.numeric(grupoA[, "NOTAFINALJUNIO"])
   notaFinalSeptiembreA  <- as.numeric(grupoA[, "NOTAFINALSEPTIEMBRE"])
