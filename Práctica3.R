@@ -382,45 +382,62 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     
 #---------------------------------------------Ejercicio 4---------------------------------------------
   
-  #
-  #
-  #Usando la nota del examen de Junio
-  #
-  #
-  #U1 = notaExamenGrupoA
-  #U2 = notaExamenGrupoB
-  #
-  
-      
-  #  
-  #Primero tenemos que comprobar si la varianza es igual o es distinta 
-  #de ambas poblaciones.
-  #Para ello tenemos que hacer un var.test()
-  #
-  #
-  #
-  t1 = var.test(notaExamenA,notaExamenB, p.value=TRUE)
-  t1$p.value
-  
-  
-  
   grupoA <- subset(datos, Grupo == "A");
   grupoB <- subset(datos, Grupo == "B");
-  
-    #U1 = Nota Examen Junio Grupo A
-    #U2 = Nota Examen Junio Grupo B
-    #
-    #H0: La variable U1 es independiente de U2. (hipótesis nula)
-    #H1: La variable U1 es dependiente de U2.
-    #
-    #nivel de significancia alpha=0.05  
   
   notaExamenA <- as.numeric(grupoA[, "EXAMENJUNIO"])
   notaExamenB <- as.numeric(grupoB[, "EXAMENJUNIO"])
   
-  t1 = var.test(notaExamenA,notaExamenB, p.value=TRUE)
+  #
+  #  
+  #Usando la nota del examen de Junio
+  #
+  #
+  
+  #  
+  #Primero tenemos que comprobar si la varianza es igual o es distinta 
+  #de ambas poblaciones.
+  #Para ello tenemos que hacer un var.test()
+  #  
+  #
+  #U1 = notaExamenGrupoA
+  #U2 = notaExamenGrupoB
+  #
+  #H0 = Varianza U1 = Varianza U2 (Hipótesis nula)
+  #H1 = Varianza U1 != Varianza U2
+  # 
+
+  t1 = var.test(notaExamenA,notaExamenB)
+  t1$p.value
+  
+  #Obtenemos un p-valor=0.0679 que es mayor a 0.05, con lo cual no podemos rechazar la
+  #hipótesis nula, luego las varianzas son iguales.
+  
+
+  #Ahora vamos a hacer el test para comprobar si hay diferencias
+  #sabiendo que las varianzas son iguales
+  #
+  
+  #
+  #U1 = Nota Examen Junio Grupo A
+  #U2 = Nota Examen Junio Grupo B
+  #
+  #H0: La variable U1 = U2 (hipótesis nula)
+  #H1: La variable U1 != U2
+  #
+  #nivel de significancia alpha=0.05  
+  
+  
+  t1 = t.test(notaExamenA,notaExamenB, var.equal=TRUE)
   
   t1$p.value
+  
+  #Obtenemos un p-valor=0.02045. Al ser el p-valor menor a 0.05
+  #podemos rechazar la hipótesis nula, con lo cual sí hay diferencias
+  #entre las notas del examen Junio del grupo A y del grupo B.
+  
+  
+  
   
   notaFinalJunioA  <- as.numeric(grupoA[, "NOTAFINALJUNIO"])
   notaFinalSeptiembreA  <- as.numeric(grupoA[, "NOTAFINALSEPTIEMBRE"])
