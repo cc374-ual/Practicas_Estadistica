@@ -94,6 +94,12 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     U1=datos[,c("EXAMENJUNIO")]
     U2=datos[,c("Practica3")]
     
+    x=table(datos$NOTAFINALJUNIO,datos$EXAMENJUNIO)
+    y=as.numeric(x)
+    
+    y
+    
+    
     tabla = table(U1,U2)
     tabla
     t1=chisq.test(tabla,simulate.p.value=TRUE)
@@ -312,3 +318,97 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     
     # Como el p-valor = 0.5987006 > 0.05 = alpha, con los datos disponibles
     # no podemos rechazar la hipótesis nula por lo que concluimos que son independientes
+    
+    
+    
+    
+#Ejercicio 2
+
+    datos <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 1/notasA3.csv", sep=",", dec=",", header=T);
+    
+    # Reemplaza los NA
+    datos[datos == ""] <- '0';
+    
+    # Reemplaza los NA
+
+    #U1 = Nota Final Junio
+    #U2 = Nota Examen Junio
+    #
+    #H0: La variable U1 = U2. (hipótesis nula)
+    #H1: La variable U1 != U2.
+    #
+    #nivel de significancia alpha=0.5
+    
+    U1= as.numeric(datos[, "EXAMENJUNIO"])
+    U1
+    
+    U2= as.numeric(datos[,"NOTAFINALJUNIO"])
+    U2    
+    testProp = t.test(U1,U2,paired=TRUE)
+    testProp$p.value    
+    
+    #Obtenemos un p-valor de 4.479137*10^-36, que, al ser > 0.05, no podemos rechazar
+    #la hipótesis nula, con lo cual podemos decir no hay diferencias
+    #entre las dos variables
+
+
+#Ejercicio 3
+
+    
+    datos <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 1/notasA3.csv", sep=",", dec=",", header=T);
+    
+    # Reemplaza los NA
+    datos[datos == ""] <- '0';
+    
+    # Reemplaza los NA
+    
+    #U1 = Nota Final Septiembre
+    #U2 = Nota Examen Septiembre
+    #
+    #H0: La variable U1 = U2. (hipótesis nula)
+    #H1: La variable U1 != U2.
+    #
+    #nivel de significancia alpha=0.05
+    
+    
+    U1= as.numeric(datos[,"NOTAFINALSEPTIEMBRE"])
+    U2= as.numeric(datos[,"EXAMENSEPTIEMBRE"])    
+    
+    testprop2=t.test(U1,U2, paired=TRUE)    
+    testprop2$p.value
+    
+#---------------------------------------------Ejercicio 4---------------------------------------------
+  
+  grupoA <- subset(datos, Grupo == "A");
+  grupoB <- subset(datos, Grupo == "B");
+  
+    #U1 = Nota Examen Junio Grupo A
+    #U2 = Nota Examen Junio Grupo B
+    #
+    #H0: La variable U1 es independiente de U2. (hipótesis nula)
+    #H1: La variable U1 es dependiente de U2.
+    #
+    #nivel de significancia alpha=0.05  
+  
+  notaExamenA <- as.numeric(grupoA[, "EXAMENJUNIO"])
+  notaExamenB <- as.numeric(grupoB[, "EXAMENJUNIO"])
+  
+  
+  t1
+  
+  
+  notaFinalJunioA  <- as.numeric(grupoA[, "NOTAFINALJUNIO"])
+  notaFinalSeptiembreA  <- as.numeric(grupoA[, "NOTAFINALSEPTIEMBRE"])
+  grupoB <- subset(datosNum, Grupo == "B");
+  notaExamenB<- as.numeric(grupoB[, "EXAMENJUNIO"])
+  notaFinalJunioB <- as.numeric(grupoB[, "NOTAFINALJUNIO"])
+  notaFinalSeptiembreB  <- as.numeric(grupoB[, "NOTAFINALSEPTIEMBRE"])
+    
+  NotaExamen <- t.test(notaExamenA, notaExamenB)
+  NotaFinalJunio <- t.test(notaFinalJunioA, notaFinalJunioB)
+  NotaFinalSeptiembre <- t.test(notaFinalSeptiembreA, notaFinalSeptiembreB)
+    
+  NotaExamen
+  NotaFinalJunio 
+  NotaFinalSeptiembre 
+    
