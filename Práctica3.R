@@ -1,3 +1,19 @@
+
+#
+#
+#Script Práctica 3 
+#
+#
+#Autores:
+
+#Ciprian Simion Chira
+#Ioan Stefan Toderic
+#Rosa Oliveira Barreto Mesquita
+
+
+
+
+
 #Cargamos los datos
 
 datos <- read.csv("C:/Users/Chira Ciprian/OneDrive - Universidad de Almeria/UAL/4 ING/SegundoCuatri/Estadística/Prácticas/Práctica 1/notasA3.csv", sep=",", dec=",", header=T);
