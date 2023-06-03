@@ -382,19 +382,20 @@ datos$NOTAFINALSEPTIEMBRE <- ifelse(datos$NOTAFINALSEPTIEMBRE >= 5, "Aprobado", 
     
 #---------------------------------------------Ejercicio 4---------------------------------------------
   
+  #
+  #  
+  #Usando la nota del examen de Junio
+  #
+  #
+    
   grupoA <- subset(datos, Grupo == "A");
   grupoB <- subset(datos, Grupo == "B");
   
   notaExamenA <- as.numeric(grupoA[, "EXAMENJUNIO"])
   notaExamenB <- as.numeric(grupoB[, "EXAMENJUNIO"])
   
-  #
-  #  
-  #Usando la nota del examen de Junio
-  #
-  #
-  
-  #  
+
+   
   #Primero tenemos que comprobar si la varianza es igual o es distinta 
   #de ambas poblaciones.
   #Para ello tenemos que hacer un var.test()
